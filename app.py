@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
-from utils.parser import extract_text
 import os
+
+from utils.parser import extract_text
+from utils.ai import analyze_resume
 
 app = Flask(__name__)
 
@@ -17,21 +19,37 @@ def home():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    resume = request.files["resume"]
-    job_description = request.form["job_description"]
+    try:
+        resume = request.files["resume"]
+        job_description = request.form["job_description"]
 
-    filepath = os.path.join(app.config["UPLOAD_FOLDER"], resume.filename)
-    resume.save(filepath)
+        filepath = os.path.join(app.config["UPLOAD_FOLDER"], resume.filename)
+        resume.save(filepath)
 
-    resume_text = extract_text(filepath)
+        print("✅ Resume saved")
 
-    return render_template(
-        "result.html",
-        filename=resume.filename,
-        job_description=job_description,
-        resume_text=resume_text
-    )
+        resume_text = extract_text(filepath)
+        print("✅ Text extracted")
+
+        analysis = analyze_resume(resume_text, job_description)
+        print("✅ AI analysis complete")
+
+        return render_template(
+            "result.html",
+            analysis=analysis
+        )
+
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        return f"<pre>{traceback.format_exc()}</pre>"
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+def result():
+    return render_template(
+        "result.html",
+        analysis=analysis
+    )
