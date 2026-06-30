@@ -1,40 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Resume Vision</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>Resume Vision</h1>
-    <p>AI-Powered Resume Analyzer</p>
+    <div class="glass-card">
 
-    <form action="/analyze" method="POST" enctype="multipart/form-data">
+        <h1>📄 Resume Vision</h1>
 
-        <label>Upload Resume (PDF)</label>
+        <p class="subtitle">
+            AI-Powered ATS Resume Analyzer
+        </p>
 
-        <input type="file" name="resume" accept=".pdf" required>
+        <form action="/analyze"
+              method="POST"
+              enctype="multipart/form-data">
 
-        <label>Job Description</label>
+            <div class="mb-4">
 
-        <textarea
-            name="job_description"
-            rows="10"
-            placeholder="Paste the job description here..."
-            required></textarea>
+                <label class="form-label">
+                    Upload Resume (PDF)
+                </label>
 
-        <button type="submit">
-            Analyze Resume
-        </button>
+                <input
+                    class="form-control"
+                    type="file"
+                    name="resume"
+                    accept=".pdf"
+                    required>
 
-    </form>
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Job Description
+                </label>
+
+                <textarea
+                    class="form-control"
+                    rows="8"
+                    name="job_description"
+                    placeholder="Paste the job description..."
+                    required></textarea>
+
+            </div>
+
+            <button class="btn btn-primary w-100 btn-lg">
+
+                Analyze Resume 🚀
+
+            </button>
+
+        </form>
+
+        <div class="footer-text">
+
+            Powered by Flask + Ollama + Llama 3
+
+        </div>
+
+    </div>
 
 </div>
 
 </body>
+
 </html>

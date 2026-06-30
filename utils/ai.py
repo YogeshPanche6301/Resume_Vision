@@ -2,44 +2,61 @@ from ollama import chat
 import json
 
 
-def analyze_resume(resume_text, job_description):
+def analyze_resume(score, matched_skills, missing_skills):
 
     prompt = f"""
-You are an expert ATS Resume Analyzer.
+You are an expert ATS Resume Reviewer.
 
-Compare the resume with the job description.
+The technical comparison has already been completed.
 
-Resume:
-{resume_text}
+ATS Score: {score}
 
-Job Description:
-{job_description}
+Matched Skills:
+{matched_skills}
 
-Return ONLY valid JSON in this exact format:
+Missing Skills:
+{missing_skills}
+
+Your job is ONLY to provide professional feedback.
+
+Rules:
+- Base your analysis ONLY on the ATS score and the matched/missing skills.
+- Do NOT invent new skills.
+- Do NOT mention skills that are not listed.
+- Return ONLY valid JSON.
+- No markdown.
+- No explanations.
+
+Return this exact JSON format:
 
 {{
-    "score": 85,
-    "matched_skills": [
-        "Python",
-        "SQL",
-        "Git"
+    "strengths": [
+        "Strength 1",
+        "Strength 2",
+        "Strength 3"
     ],
-    "missing_skills": [
-        "Docker",
-        "AWS"
-    ],
-    "suggestions": [
-        "Learn Docker",
-        "Add AWS projects",
-        "Quantify achievements"
-    ]
-}}
 
-Return ONLY JSON.
+    "weaknesses": [
+        "Weakness 1",
+        "Weakness 2",
+        "Weakness 3"
+    ],
+
+    "suggestions": [
+        "Suggestion 1",
+        "Suggestion 2",
+        "Suggestion 3",
+        "Suggestion 4",
+        "Suggestion 5"
+    ],
+
+    "verdict": "Excellent Match"
+}}
 """
 
     response = chat(
         model="llama3:latest",
+        format="json",
         messages=[
             {
                 "role": "user",
@@ -48,4 +65,24 @@ Return ONLY JSON.
         ]
     )
 
-    return json.loads(response.message.content)
+    print("=" * 70)
+    print(response.message.content)
+    print("=" * 70)
+
+    try:
+        return json.loads(response.message.content)
+
+    except json.JSONDecodeError:
+
+        return {
+            "strengths": [
+                "Good technical foundation."
+            ],
+            "weaknesses": [
+                "AI could not generate detailed feedback."
+            ],
+            "suggestions": [
+                "Try running the analysis again."
+            ],
+            "verdict": "Analysis Completed"
+        }

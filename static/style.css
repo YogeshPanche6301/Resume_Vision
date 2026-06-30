@@ -2,12 +2,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
 
-    background:#f4f7fb;
+    min-height:100vh;
 
     display:flex;
 
@@ -15,20 +14,39 @@ body{
 
     align-items:center;
 
-    height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+
+    font-family:'Segoe UI',sans-serif;
+
 }
 
 .container{
 
-    width:700px;
+    display:flex;
 
-    background:white;
+    justify-content:center;
 
-    padding:40px;
+    align-items:center;
 
-    border-radius:15px;
+}
 
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
+.glass-card{
+
+    width:720px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:20px;
+
+    padding:45px;
+
+    color:white;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
 
 }
 
@@ -36,71 +54,74 @@ h1{
 
     text-align:center;
 
-    color:#1e3a8a;
+    font-size:40px;
 
-    margin-bottom:10px;
+    font-weight:700;
+
 }
 
-p{
+.subtitle{
 
     text-align:center;
 
-    color:gray;
+    margin-top:10px;
 
-    margin-bottom:30px;
+    margin-bottom:35px;
+
+    color:#d1d5db;
+
 }
 
-label{
+.form-label{
 
-    display:block;
+    font-weight:600;
 
-    margin-top:20px;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
 }
 
-input[type=file]{
+.form-control{
 
-    width:100%;
-}
-
-textarea{
-
-    width:100%;
-
-    padding:10px;
-
-    resize:none;
-
-    border-radius:8px;
-
-    border:1px solid #ccc;
-}
-
-button{
-
-    width:100%;
-
-    margin-top:25px;
-
-    padding:15px;
-
-    background:#2563eb;
-
-    color:white;
+    background:white;
 
     border:none;
 
-    border-radius:8px;
+    border-radius:12px;
 
-    font-size:17px;
+    padding:14px;
 
-    cursor:pointer;
 }
 
-button:hover{
+.form-control:focus{
 
-    background:#1d4ed8;
+    box-shadow:0 0 0 4px rgba(37,99,235,.3);
+
+}
+
+.btn{
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.footer-text{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
 }
