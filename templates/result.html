@@ -23,6 +23,21 @@
 </head>
 <body>
 
+    <!-- Notification Toast if error/payment warning exists -->
+    {% if error %}
+    <div class="alert-container" id="errorAlert">
+        <div class="custom-alert">
+            <div class="alert-content">
+                <i class="ti ti-alert-triangle-filled alert-icon"></i>
+                <span class="alert-text">{{ error }}</span>
+            </div>
+            <button class="alert-close" onclick="document.getElementById('errorAlert').remove()">
+                <i class="ti ti-x"></i>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+
     <main class="dashboard-wrapper">
         <div class="dashboard-container">
             
@@ -220,8 +235,8 @@
             <!-- 7. Console Operations Action Row -->
             <footer class="action-footer">
                 <div class="action-buttons">
-                    <a href="/download" class="action-btn btn-primary">
-                        <span>DOWNLOAD PRINT REPORT</span>
+                    <a href="/checkout" class="action-btn btn-primary">
+                        <span>DOWNLOAD PRINT REPORT (₹10)</span>
                         <i class="ti ti-download"></i>
                     </a>
                     

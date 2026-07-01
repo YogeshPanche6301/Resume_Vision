@@ -700,3 +700,77 @@ html, body {
         justify-content: center;
     }
 }
+
+/* Custom Notification Toast */
+.alert-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    left: 24px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .alert-container {
+        left: auto;
+        width: 400px;
+    }
+}
+
+.custom-alert {
+    pointer-events: auto;
+    background-color: var(--bg-secondary);
+    border-left: 4px solid var(--error);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-icon {
+    font-size: 20px;
+    color: var(--error);
+}
+
+.alert-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.alert-close:hover {
+    color: var(--text-primary);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

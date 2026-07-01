@@ -35,21 +35,21 @@
     ],
     "analysis": {
         "strengths": [
-            "CSS, Docker, and Git skills showcase your proficiency in web development and ability to work with popular tools",
-            "JavaScript, NumPy, Pandas, and Python skills highlight your data analysis and scientific computing expertise",
-            "React and GitHub skills demonstrate your ability to build dynamic web applications and collaborate effectively"
+            "Technical expertise in frontend development with React, JavaScript, and HTML",
+            "Familiarity with version control using Git and GitHub",
+            "Able to leverage Docker for containerization"
         ],
         "weaknesses": [
-            "Lack of AWS experience may limit job opportunities in cloud-based development",
-            "Inability to work with algorithms and data structures may hinder problem-solving abilities",
-            "Insufficient knowledge of machine learning, deep learning, or generative AI may make it difficult to stay competitive in the industry"
+            "Lack of experience working with cloud-based services such as AWS",
+            "Inability to apply machine learning or deep learning concepts",
+            "Ignoring the importance of algorithms and data structures in software development"
         ],
         "suggestions": [
-            "Consider taking online courses to learn AWS and improve your cloud computing skills",
-            "Incorporate projects that demonstrate algorithmic thinking and data structure expertise",
-            "Explore machine learning and deep learning frameworks such as TensorFlow or PyTorch to stay current with industry trends",
-            "Practice building RESTful APIs using Flask or Django to enhance web development skills",
-            "Participate in coding challenges or Kaggle competitions to improve problem-solving abilities"
+            "Consider taking online courses or attending webinars on AWS, machine learning, and deep learning to expand your skill set",
+            "Practice problem-solving with algorithmic challenges to improve coding skills",
+            "Incorporate more projects using Flask, PyTorch, or TensorFlow to gain hands-on experience with frameworks",
+            "Familiarize yourself with Linux and Kubernetes for improved DevOps knowledge",
+            "Achieve certification in RAG (Responsive Adaptive Grid) to demonstrate expertise"
         ]
     }
 }
