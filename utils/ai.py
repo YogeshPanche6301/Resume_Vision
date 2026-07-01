@@ -1,5 +1,3 @@
-# pyrefly: ignore [missing-import]
-from ollama import chat
 import json
 import os
 import google.generativeai as genai
@@ -54,31 +52,20 @@ Return ONLY valid JSON.
 
     gemini_key = os.getenv("GEMINI_API_KEY")
 
-    if gemini_key:
-        print("☁️ Using Google Gemini API Cloud Service...")
-        genai.configure(api_key=gemini_key)
-        
-        # Using gemini-1.5-flash for speed and reliability, set up to return JSON
-        model = genai.GenerativeModel(
-            model_name='gemini-1.5-flash',
-            generation_config={"response_mime_type": "application/json"}
-        )
-        
-        response = model.generate_content(prompt)
-        content = response.text
-    else:
-        print("💻 Using local Ollama...")
-        response = chat(
-            model="llama3:latest",
-            format="json",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
-        content = response.message.content
+    if not gemini_key:
+        raise ValueError("GEMINI_API_KEY environment variable is missing. Please configure it in your environment or .env file.")
+
+    print("☁️ Using Google Gemini API Cloud Service...")
+    genai.configure(api_key=gemini_key)
+    
+    # Using gemini-1.5-flash for speed and reliability, set up to return JSON
+    model = genai.GenerativeModel(
+        model_name='gemini-1.5-flash',
+        generation_config={"response_mime_type": "application/json"}
+    )
+    
+    response = model.generate_content(prompt)
+    content = response.text
 
     print(content)
 
@@ -101,22 +88,13 @@ Extracted Name:"""
 
     gemini_key = os.getenv("GEMINI_API_KEY")
     try:
-        if gemini_key:
-            genai.configure(api_key=gemini_key)
-            model = genai.GenerativeModel(model_name='gemini-1.5-flash')
-            response = model.generate_content(prompt)
-            name = response.text.strip()
-        else:
-            response = chat(
-                model="llama3:latest",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
-            )
-            name = response.message.content.strip()
+        if not gemini_key:
+            raise ValueError("GEMINI_API_KEY is not set.")
+
+        genai.configure(api_key=gemini_key)
+        model = genai.GenerativeModel(model_name='gemini-1.5-flash')
+        response = model.generate_content(prompt)
+        name = response.text.strip()
 
         # Clean up any quotes or labels the AI might have accidentally appended
         name = name.replace('"', '').replace("'", "")

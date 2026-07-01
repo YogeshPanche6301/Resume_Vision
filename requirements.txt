@@ -16,7 +16,6 @@ idna==3.18
 itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
-ollama==0.6.2
 pdfminer.six==20260107
 pdfplumber==0.11.10
 pillow==12.2.0

@@ -87,14 +87,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 FLASK_SECRET_KEY=your_random_secret_passphrase
 ```
 
-### 3. Deploy to Vercel
-1. Push your repository to **GitHub**.
-2. Connect your GitHub account to [Vercel](https://vercel.com/).
-3. Import the `Resume-Vision` project.
-4. Add the following **Environment Variables** in Vercel project settings:
-   * `GEMINI_API_KEY` (Your Google AI Studio Key)
-   * `FLASK_SECRET_KEY` (Any secure string to encrypt Flask cookie sessions)
-5. Click **Deploy**. Vercel will build the serverless functions using the root `vercel.json` file.
+
 
 ---
 
