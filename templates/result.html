@@ -49,7 +49,7 @@
                         <span>RESUME_VISION</span>
                     </a>
                     <span class="header-separator">//</span>
-                    <span class="report-id">RE_VERIFICATION_REPORT</span>
+                    <span class="report-id">{{ candidate_name.upper() }}_EVALUATION</span>
                 </div>
                 
                 <div class="header-status">
@@ -59,6 +59,12 @@
                     </span>
                 </div>
             </header>
+
+            <!-- Candidate Monospace profile segment bar -->
+            <div class="candidate-profile-bar">
+                <span class="profile-label">APPLICANT_NAME:</span>
+                <span class="profile-value">{{ candidate_name.upper() }}</span>
+            </div>
 
             <!-- 2. Hero Score Pane: Radial Gauge + Numeric Grade -->
             <section class="score-pane">

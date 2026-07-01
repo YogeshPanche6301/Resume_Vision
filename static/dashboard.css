@@ -774,3 +774,26 @@ html, body {
     from { transform: translateY(-16px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+
+/* Candidate Profile Bar */
+.candidate-profile-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+}
+
+.profile-label {
+    color: var(--text-secondary);
+}
+
+.profile-value {
+    color: var(--accent);
+    font-weight: 700;
+}

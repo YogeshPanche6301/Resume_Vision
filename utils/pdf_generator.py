@@ -58,6 +58,7 @@ def section_heading(text, story):
 
 def generate_pdf(
     filepath,
+    candidate_name,
     score,
     grade,
     verdict,
@@ -81,6 +82,15 @@ def generate_pdf(
     story.append(
         Paragraph(
             "<b>AI ATS Resume Analysis Report</b>",
+            normal_style
+        )
+    )
+
+    story.append(Spacer(1, 4))
+
+    story.append(
+        Paragraph(
+            f"<b>Candidate:</b> {candidate_name}",
             normal_style
         )
     )
@@ -110,6 +120,8 @@ def generate_pdf(
     score_table = Table(
 
         [
+
+            ["Candidate Name", candidate_name],
 
             ["ATS Score", f"{score}%"],
 

@@ -6,7 +6,7 @@ import stripe
 
 from utils.parser import extract_text
 from utils.skills import extract_skills, compare_skills
-from utils.ai import analyze_resume
+from utils.ai import analyze_resume, extract_name
 from utils.pdf_generator import generate_pdf
 
 # Load environment configurations
@@ -91,6 +91,12 @@ def analyze():
         resume_text = extract_text(filepath)
 
         print("✅ Resume Text Extracted")
+
+        # ------------------------
+        # Extract Candidate Name
+        # ------------------------
+        candidate_name = extract_name(resume_text)
+        print("Candidate Name:", candidate_name)
 
         # ------------------------
         # Skill Extraction
@@ -181,6 +187,8 @@ def analyze():
 
         latest_report = {
 
+            "candidate_name": candidate_name,
+
             "score": score,
 
             "grade": grade,
@@ -209,6 +217,8 @@ def analyze():
         return render_template(
 
             "result.html",
+
+            candidate_name=candidate_name,
 
             score=score,
 
@@ -258,6 +268,8 @@ def download():
     generate_pdf(
 
         filepath,
+
+        latest_report.get("candidate_name", "Candidate"),
 
         latest_report["score"],
 

@@ -1,32 +1,55 @@
 {
-    "score": 100,
-    "grade": "A+",
-    "verdict": "Excellent Match",
+    "score": 44,
+    "grade": "F",
+    "verdict": "Needs Improvement",
     "matched_skills": [
         "CSS",
+        "Docker",
+        "Git",
+        "GitHub",
         "HTML",
         "JavaScript",
+        "NumPy",
+        "Pandas",
         "Python",
+        "RAG",
+        "React",
         "SQL"
     ],
-    "missing_skills": [],
+    "missing_skills": [
+        "AWS",
+        "Algorithms",
+        "Data Structures",
+        "Deep Learning",
+        "Flask",
+        "Generative AI",
+        "Kubernetes",
+        "LangChain",
+        "Linux",
+        "Machine Learning",
+        "MongoDB",
+        "Object-Oriented Programming",
+        "PyTorch",
+        "REST API",
+        "TensorFlow"
+    ],
     "analysis": {
         "strengths": [
-            "Adept at crafting responsive web applications using CSS, HTML, and JavaScript",
-            "Skilled in developing scalable and efficient databases using SQL and Python",
-            "Proficient in leveraging JavaScript to create interactive and engaging user experiences"
+            "CSS and React skills showcase expertise in building visually appealing and user-friendly web applications.",
+            "Python skills demonstrate proficiency in data analysis, machine learning, and automation, making you a valuable asset for data-driven projects.",
+            "GitHub presence highlights your ability to collaborate effectively with team members and maintain a clean, organized codebase."
         ],
         "weaknesses": [
-            "Tendency to overcomplicate solutions with excessive use of advanced programming concepts",
-            "Inability to effectively communicate technical details to non-technical stakeholders",
-            "Lack of experience working on large-scale projects with multiple team members"
+            "Lack of AWS experience may make it difficult to work with cloud-based infrastructure or deploy applications on Amazon's platform.",
+            "Insufficient exposure to machine learning libraries like PyTorch, TensorFlow, or Keras may hinder your ability to contribute to AI-driven projects.",
+            "Inconsistent use of version control systems like Git and GitHub may lead to errors, inconsistencies, or difficulties in tracking code changes."
         ],
         "suggestions": [
-            "Consider taking online courses or attending workshops to improve communication skills and adaptability",
-            "Practice simplifying complex problems by breaking them down into smaller, manageable parts",
-            "Seek out mentorship from experienced professionals to learn best practices and expand skillset",
-            "Develop a portfolio showcasing a variety of projects demonstrating technical expertise",
-            "Pursue certifications in relevant technologies (e.g. Python, JavaScript) to increase credibility"
+            "Consider taking courses or attending workshops on AWS to improve your cloud computing skills and expand your career prospects.",
+            "Expand your machine learning repertoire by exploring libraries like PyTorch, TensorFlow, or Keras to stay competitive in the field.",
+            "Develop a consistent workflow for using Git and GitHub by creating a personal project or contributing to open-source repositories.",
+            "Practice building RESTful APIs with Flask or Django to improve your understanding of web development principles.",
+            "Participate in online communities like Reddit's r/learnpython, r/webdev, or Stack Overflow to stay updated on the latest trends and best practices."
         ]
     }
 }
