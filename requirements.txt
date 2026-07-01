@@ -24,7 +24,7 @@ pydantic==2.13.4
 pydantic_core==2.46.4
 pymupdf==1.28.0
 pypdfium2==5.11.0
-report==0.0.1
+reportlab==5.0.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 Werkzeug==3.1.8

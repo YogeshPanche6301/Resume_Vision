@@ -14,12 +14,25 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback_default_dev_key")
 
-UPLOAD_FOLDER = "uploads"
+# Vercel has a read-only filesystem except for /tmp.
+# Check if running on Vercel and adjust directories accordingly.
+IS_VERCEL = os.environ.get("VERCEL") == "1"
+
+if IS_VERCEL:
+    UPLOAD_FOLDER = "/tmp"
+    BACKUP_FILE = "/tmp/latest_report.json"
+    PDF_OUTPUT_PATH = "/tmp/ATS_Report.pdf"
+else:
+    UPLOAD_FOLDER = "uploads"
+    BACKUP_FILE = "latest_report.json"
+    PDF_OUTPUT_PATH = "ATS_Report.pdf"
+
 ALLOWED_EXTENSIONS = {"pdf"}
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+if not IS_VERCEL:
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Store latest report temporarily
 latest_report = {}
@@ -201,7 +214,7 @@ def analyze():
 
         # Backup report to disk to prevent data loss on server reload
         try:
-            with open("latest_report.json", "w", encoding="utf-8") as f:
+            with open(BACKUP_FILE, "w", encoding="utf-8") as f:
                 json.dump(latest_report, f, indent=4)
         except Exception as e:
             print("Warning: Could not save report backup:", e)
@@ -249,9 +262,9 @@ def download():
 
     if not latest_report:
         # Load from disk backup if available
-        if os.path.exists("latest_report.json"):
+        if os.path.exists(BACKUP_FILE):
             try:
-                with open("latest_report.json", "r", encoding="utf-8") as f:
+                with open(BACKUP_FILE, "r", encoding="utf-8") as f:
                     latest_report = json.load(f)
             except Exception as e:
                 print("Error loading report backup:", e)
@@ -259,7 +272,7 @@ def download():
     if not latest_report:
         return "Please analyze a resume first."
 
-    filepath = "ATS_Report.pdf"
+    filepath = PDF_OUTPUT_PATH
 
     generate_pdf(
 
