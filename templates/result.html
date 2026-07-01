@@ -77,6 +77,15 @@
             </section>
 
             <!-- 3. Key Metrics Columns (Stats Cards) -->
+            {% set total_skills = matched_skills|length + missing_skills|length %}
+            {% if total_skills > 0 %}
+                {% set matched_percent = (matched_skills|length / total_skills) * 100 %}
+                {% set missing_percent = (missing_skills|length / total_skills) * 100 %}
+            {% else %}
+                {% set matched_percent = 0 %}
+                {% set missing_percent = 0 %}
+            {% endif %}
+
             <section class="metrics-grid">
                 <div class="metric-card">
                     <span class="metric-num">{{ score }}%</span>
@@ -86,17 +95,17 @@
                 <div class="metric-card">
                     <span class="metric-num">{{ matched_skills|length }}</span>
                     <span class="metric-label">IDENTIFIED MATCHES</span>
-                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-success" style="width: calc({{ matched_skills|length }} * 10%)"></div></div>
+                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-success" style="width: {{ matched_percent }}%"></div></div>
                 </div>
                 <div class="metric-card">
                     <span class="metric-num">{{ missing_skills|length }}</span>
                     <span class="metric-label">CRITICAL MISSING</span>
-                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-error" style="width: calc({{ missing_skills|length }} * 10%)"></div></div>
+                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-error" style="width: {{ missing_percent }}%"></div></div>
                 </div>
                 <div class="metric-card">
                     <span class="metric-num">{{ analysis.suggestions|length }}</span>
                     <span class="metric-label">AI REVISIONS</span>
-                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-warning" style="width: calc({{ analysis.suggestions|length }} * 15%)"></div></div>
+                    <div class="metric-bar-bg"><div class="metric-bar-fill fill-warning" style="width: calc({{ analysis.suggestions|length }} * 20%)"></div></div>
                 </div>
             </section>
 

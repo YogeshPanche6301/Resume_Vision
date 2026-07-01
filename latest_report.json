@@ -1,0 +1,55 @@
+{
+    "score": 44,
+    "grade": "F",
+    "verdict": "Needs Improvement",
+    "matched_skills": [
+        "CSS",
+        "Docker",
+        "Git",
+        "GitHub",
+        "HTML",
+        "JavaScript",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "RAG",
+        "React",
+        "SQL"
+    ],
+    "missing_skills": [
+        "AWS",
+        "Algorithms",
+        "Data Structures",
+        "Deep Learning",
+        "Flask",
+        "Generative AI",
+        "Kubernetes",
+        "LangChain",
+        "Linux",
+        "Machine Learning",
+        "MongoDB",
+        "Object-Oriented Programming",
+        "PyTorch",
+        "REST API",
+        "TensorFlow"
+    ],
+    "analysis": {
+        "strengths": [
+            "CSS, Docker, and Git skills showcase your proficiency in web development and ability to work with popular tools",
+            "JavaScript, NumPy, Pandas, and Python skills highlight your data analysis and scientific computing expertise",
+            "React and GitHub skills demonstrate your ability to build dynamic web applications and collaborate effectively"
+        ],
+        "weaknesses": [
+            "Lack of AWS experience may limit job opportunities in cloud-based development",
+            "Inability to work with algorithms and data structures may hinder problem-solving abilities",
+            "Insufficient knowledge of machine learning, deep learning, or generative AI may make it difficult to stay competitive in the industry"
+        ],
+        "suggestions": [
+            "Consider taking online courses to learn AWS and improve your cloud computing skills",
+            "Incorporate projects that demonstrate algorithmic thinking and data structure expertise",
+            "Explore machine learning and deep learning frameworks such as TensorFlow or PyTorch to stay current with industry trends",
+            "Practice building RESTful APIs using Flask or Django to enhance web development skills",
+            "Participate in coding challenges or Kaggle competitions to improve problem-solving abilities"
+        ]
+    }
+}
