@@ -236,100 +236,10 @@ def analyze():
         )
 
 
-@app.route("/checkout")
-def checkout():
-    global latest_report
-    if not latest_report:
-        # Load from disk backup if available
-        if os.path.exists("latest_report.json"):
-            try:
-                with open("latest_report.json", "r", encoding="utf-8") as f:
-                    latest_report = json.load(f)
-            except Exception as e:
-                print("Error loading report backup:", e)
-
-    if not latest_report:
-        return render_template("index.html", error="Please upload and analyze a resume first.")
-
-    try:
-        domain_url = request.host_url.rstrip('/')
-        checkout_session = stripe.checkout.Session.create(
-            line_items=[
-                {
-                    'price_data': {
-                        'currency': 'inr',
-                        'unit_amount': 1000, # ₹10.00 (1000 paise)
-                        'product_data': {
-                            'name': 'Resume Vision - Premium ATS Report PDF Download',
-                            'description': f'Evaluation report for ATS Score: {latest_report.get("score", 0)}%',
-                        },
-                    },
-                    'quantity': 1,
-                },
-            ],
-            mode='payment',
-            success_url=f"{domain_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}",
-            cancel_url=f"{domain_url}/payment-cancel",
-        )
-        return redirect(checkout_session.url, code=303)
-    except Exception as e:
-        print("Stripe Checkout Error:", e)
-        return render_template("index.html", error="Unable to initialize payment. Please try again.")
-
-
-@app.route("/payment-success")
-def payment_success():
-    session_id = request.args.get("session_id")
-    if not session_id:
-        return redirect(url_for("home"))
-
-    try:
-        checkout_session = stripe.checkout.Session.retrieve(session_id)
-        if checkout_session.payment_status == "paid":
-            session['payment_completed'] = True
-            return redirect(url_for("download"))
-        else:
-            return render_template("index.html", error="Payment was not successful. Please try again.")
-    except Exception as e:
-        print("Stripe session verification error:", e)
-        return render_template("index.html", error="Error verifying payment. Please try again.")
-
-
-@app.route("/payment-cancel")
-def payment_cancel():
-    global latest_report
-    if not latest_report and os.path.exists("latest_report.json"):
-        try:
-            with open("latest_report.json", "r", encoding="utf-8") as f:
-                latest_report = json.load(f)
-        except Exception:
-            pass
-
-    if latest_report:
-        return render_template(
-            "result.html",
-            score=latest_report["score"],
-            grade=latest_report["grade"],
-            verdict=latest_report["verdict"],
-            analysis=latest_report["analysis"],
-            matched_skills=latest_report["matched_skills"],
-            missing_skills=latest_report["missing_skills"],
-            error="Payment cancelled. You must pay ₹10 to download the report."
-        )
-    return redirect(url_for("home"))
-
-
 @app.route("/download")
 def download():
 
     global latest_report
-
-    # Verify payment completion
-    if not session.get('payment_completed'):
-        return redirect(url_for("payment_cancel"))
-
-    # Reset payment status immediately to prevent re-use
-    session.pop('payment_completed', None)
 
     if not latest_report:
         # Load from disk backup if available
