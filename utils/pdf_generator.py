@@ -1,0 +1,247 @@
+from datetime import datetime
+
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle
+)
+
+# ------------------------------------
+# Colors
+# ------------------------------------
+
+PRIMARY = colors.HexColor("#2563EB")
+SUCCESS = colors.HexColor("#16A34A")
+DANGER = colors.HexColor("#DC2626")
+WARNING = colors.HexColor("#F59E0B")
+LIGHT = colors.HexColor("#F3F4F6")
+DARK = colors.HexColor("#1F2937")
+
+# ------------------------------------
+# Styles
+# ------------------------------------
+
+styles = getSampleStyleSheet()
+
+title_style = styles["Heading1"]
+title_style.alignment = TA_CENTER
+title_style.textColor = PRIMARY
+
+heading_style = styles["Heading2"]
+heading_style.textColor = PRIMARY
+
+normal_style = styles["BodyText"]
+
+footer_style = styles["Italic"]
+footer_style.alignment = TA_CENTER
+footer_style.textColor = colors.grey
+
+
+# ------------------------------------
+# Helper Function
+# ------------------------------------
+
+def section_heading(text, story):
+    story.append(Spacer(1, 15))
+    story.append(Paragraph(text, heading_style))
+    story.append(Spacer(1, 8))
+
+
+# ------------------------------------
+# PDF Generator
+# ------------------------------------
+
+def generate_pdf(
+    filepath,
+    score,
+    grade,
+    verdict,
+    matched_skills,
+    missing_skills,
+    analysis
+):
+
+    doc = SimpleDocTemplate(filepath)
+
+    story = []
+
+    # ===================================
+    # TITLE
+    # ===================================
+
+    story.append(
+        Paragraph("Resume Vision", title_style)
+    )
+
+    story.append(
+        Paragraph(
+            "<b>AI ATS Resume Analysis Report</b>",
+            normal_style
+        )
+    )
+
+    story.append(Spacer(1, 8))
+
+    story.append(
+
+        Paragraph(
+
+            datetime.now().strftime(
+                "Generated on %d %B %Y | %I:%M %p"
+            ),
+
+            footer_style
+
+        )
+
+    )
+
+    story.append(Spacer(1, 20))
+
+    # ===================================
+    # SCORE CARD
+    # ===================================
+
+    score_table = Table(
+
+        [
+
+            ["ATS Score", f"{score}%"],
+
+            ["Grade", grade],
+
+            ["Recruiter Verdict", verdict]
+
+        ],
+
+        colWidths=[180, 250]
+
+    )
+
+    score_table.setStyle(
+
+        TableStyle([
+
+            ("BACKGROUND", (0, 0), (-1, 0), PRIMARY),
+
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+
+            ("GRID", (0, 0), (-1, -1), 1, colors.grey),
+
+            ("BACKGROUND", (0, 1), (-1, -1), LIGHT),
+
+            ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
+
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
+
+            ("TOPPADDING", (0, 0), (-1, -1), 10),
+
+            ("ALIGN", (0, 0), (-1, -1), "CENTER")
+
+        ])
+
+    )
+
+    story.append(score_table)
+
+    # ===================================
+    # MATCHED SKILLS
+    # ===================================
+
+    section_heading("Matched Skills", story)
+
+    if matched_skills:
+
+        for skill in matched_skills:
+
+            story.append(
+                Paragraph(f"✓ {skill}", normal_style)
+            )
+
+    else:
+
+        story.append(
+            Paragraph("No matched skills found.", normal_style)
+        )
+
+    # ===================================
+    # MISSING SKILLS
+    # ===================================
+
+    section_heading("Missing Skills", story)
+
+    if missing_skills:
+
+        for skill in missing_skills:
+
+            story.append(
+                Paragraph(f"✗ {skill}", normal_style)
+            )
+
+    else:
+
+        story.append(
+            Paragraph("No missing skills.", normal_style)
+        )
+
+    # ===================================
+    # STRENGTHS
+    # ===================================
+
+    section_heading("Strengths", story)
+
+    for item in analysis["strengths"]:
+
+        story.append(
+            Paragraph(f"• {item}", normal_style)
+        )
+
+    # ===================================
+    # WEAKNESSES
+    # ===================================
+
+    section_heading("Weaknesses", story)
+
+    for item in analysis["weaknesses"]:
+
+        story.append(
+            Paragraph(f"• {item}", normal_style)
+        )
+
+    # ===================================
+    # AI SUGGESTIONS
+    # ===================================
+
+    section_heading("AI Suggestions", story)
+
+    for item in analysis["suggestions"]:
+
+        story.append(
+            Paragraph(f"• {item}", normal_style)
+        )
+
+    # ===================================
+    # FOOTER
+    # ===================================
+
+    story.append(Spacer(1, 30))
+
+    story.append(
+
+        Paragraph(
+
+            "Generated by Resume Vision<br/>"
+            "AI Powered ATS Resume Analyzer",
+
+            footer_style
+
+        )
+
+    )
+
+    doc.build(story)

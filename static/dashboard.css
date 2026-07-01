@@ -1,382 +1,700 @@
+/* ==========================================================================
+   RESUME VISION - REPORT DASHBOARD (DASHBOARD.CSS)
+   Aesthetic: Technical Swiss / Bauhaus Remix (Sharp corners, high contrast, dark)
+   ========================================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
+/* 1. Base Variables & Tokens */
+:root {
+    --bg-primary: #0a0c10;
+    --bg-secondary: #11141e;
+    --bg-tertiary: #191e2b;
+    --border-color: #222938;
+    
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    
+    --accent: #ff5a1f;          /* Signal Orange */
+    --accent-hover: #e04810;
+    --success: #10b981;         /* Emerald Green */
+    --success-bg: rgba(16, 185, 129, 0.08);
+    --error: #ef4444;           /* Crimson Red */
+    --error-bg: rgba(239, 68, 68, 0.08);
+    --warning: #f59e0b;         /* Amber */
+    
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body{
-
-    background:
-    radial-gradient(circle at top left,#2563eb,#0f172a);
-
-    min-height:100vh;
-
-    color:white;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container{
-
-    max-width:1200px;
-
+html, body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* ============================= */
-
-.dashboard{
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    border-radius:25px;
-
-    padding:50px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
-
+/* 2. Container Layout */
+.dashboard-wrapper {
+    width: 100%;
+    padding: 48px 24px;
+    display: flex;
+    justify-content: center;
 }
 
-/* ============================= */
-
-.logo{
-
-    text-align:center;
-
-    font-size:42px;
-
-    font-weight:700;
-
+.dashboard-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: dashboardFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.subtitle{
-
-    text-align:center;
-
-    color:#d1d5db;
-
-    margin-bottom:40px;
-
-    font-size:18px;
-
+/* 3. Header Block */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
 }
 
-/* =============================
-        Score Circle
-============================= */
-
-/* ===========================
-        Score Circle
-=========================== */
-
-.score-section{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:40px 0;
+.header-branding {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
 }
 
-.circle{
-    position:relative;
-    width:240px;
-    height:240px;
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition-fast);
 }
 
-.circle svg{
-    width:240px;
-    height:240px;
-    transform:rotate(-90deg);
+.header-logo:hover {
+    color: var(--accent);
 }
 
-.bg{
-    fill:none;
-    stroke:#2d4267;
-    stroke-width:12;
+.header-logo i {
+    font-size: 18px;
+    color: var(--accent);
 }
 
-.progress{
-    fill:none;
-    stroke:#22c55e;
-    stroke-width:12;
-    stroke-linecap:round;
-
-    stroke-dasharray:534;
-    stroke-dashoffset:534;
-
-    transition:stroke-dashoffset 2s ease;
+.header-separator {
+    color: var(--text-muted);
 }
 
-.number{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+.report-id {
+    color: var(--text-secondary);
 }
 
-.number h1{
-    font-size:58px;
-    font-weight:bold;
-    color:white;
-    margin:0;
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border: 1px solid var(--border-color);
 }
 
-.number p{
-    margin-top:10px;
-    color:#d1d5db;
-    font-size:18px;
-}
-/* =============================
-        Stats
-============================= */
-
-.stat{
-
-    background:rgba(255,255,255,.07);
-
-    border-radius:18px;
-
-    text-align:center;
-
-    padding:28px;
-
-    transition:.35s;
-
-    border:1px solid rgba(255,255,255,.08);
-
+.status-pill.text-success {
+    color: var(--success);
+    border-color: rgba(16, 185, 129, 0.2);
+    background-color: var(--success-bg);
 }
 
-.stat:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 15px 30px rgba(0,0,0,.35);
-
+/* 4. Score Hero Block */
+.score-pane {
+    width: 100%;
 }
 
-.stat i{
-
-    font-size:38px;
-
-    color:#60a5fa;
-
+.gauge-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 56px;
 }
 
-.stat h3{
-
-    margin-top:15px;
-
-    font-size:34px;
-
+.radial-gauge-container {
+    flex-shrink: 0;
 }
 
-.stat p{
-
-    color:#d1d5db;
-
-    margin-top:5px;
-
+.circle-box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-
-
-
-/* =============================
-        Cards
-============================= */
-
-.box{
-
-    background:rgba(255,255,255,.06);
-
-    border-radius:18px;
-
-    padding:30px;
-
-    margin-top:30px;
-
-    border:1px solid rgba(255,255,255,.08);
-
+.gauge-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    transform-origin: center;
 }
 
-.box h3{
-
-    margin-bottom:25px;
-
-    font-weight:700;
-
+.gauge-track {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 12;
 }
 
-/* =============================
-        Skill Pills
-============================= */
-
-.skills{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
+.gauge-progress {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 12;
+    stroke-linecap: square;
+    stroke-dasharray: 597;  /* 2 * PI * r (r=95) */
+    stroke-dashoffset: 597;
+    transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.skills span{
-
-    padding:12px 22px;
-
-    border-radius:40px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-    cursor:pointer;
-
+.gauge-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.skills span:hover{
-
-    transform:scale(1.08);
-
+.gauge-percentage {
+    font-family: var(--font-mono);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
 }
 
-.matched{
-
-    background:linear-gradient(45deg,#22c55e,#16a34a);
-
+.gauge-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
 }
 
-.missing{
-
-    background:linear-gradient(45deg,#ef4444,#dc2626);
-
+.grade-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-/* =============================
-        Suggestions
-============================= */
-
-.tip{
-
-    background:white;
-
-    color:#1f2937;
-
-    padding:18px;
-
-    border-radius:12px;
-
-    margin-bottom:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    transition:.3s;
-
+.terminal-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
 }
 
-.tip:hover{
-
-    transform:translateX(10px);
-
+.grade-display {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
 }
 
-.tip i{
-
-    color:#22c55e;
-
-    font-size:22px;
-
+.verdict-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 8px;
 }
 
-/* =============================
-        Buttons
-============================= */
-
-.buttons{
-
-    margin-top:45px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:20px;
-
+.icon-verdict {
+    font-size: 18px;
 }
 
-.btn{
-
-    padding:14px 35px;
-
-    border-radius:12px;
-
-    font-size:18px;
-
-    transition:.3s;
-
+/* 5. Metrics Columns (Grid) */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
-.btn:hover{
-
-    transform:translateY(-4px);
-
+.metric-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: var(--transition-normal);
 }
 
-/* =============================
-        Responsive
-============================= */
-
-@media(max-width:768px){
-
-.dashboard{
-
-padding:25px;
-
+.metric-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--text-muted);
 }
 
-.logo{
-
-font-size:34px;
-
+.metric-num {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
 }
 
-.circle{
-
-width:180px;
-
-height:180px;
-
+.metric-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
 }
 
-.circle svg{
-
-width:180px;
-
-height:180px;
-
+/* Visual Bar gauges inside cards */
+.metric-bar-bg {
+    width: 100%;
+    height: 4px;
+    background-color: var(--bg-tertiary);
+    margin-top: 4px;
 }
 
-.number h1{
-
-font-size:40px;
-
+.metric-bar-fill {
+    height: 100%;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
 }
 
-.buttons{
+.fill-accent { background-color: var(--accent); }
+.fill-success { background-color: var(--success); }
+.fill-error { background-color: var(--error); }
+.fill-warning { background-color: var(--warning); }
 
-flex-direction:column;
-
+/* 6. Skills Split Column Lists */
+.skills-section {
+    width: 100%;
 }
 
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.skills-block {
+    background-color: var(--bg-secondary);
+    border-top: 3px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    padding: 32px;
+}
+
+.skills-block.border-success { border-top-color: var(--success); }
+.skills-block.border-error { border-top-color: var(--error); }
+
+.block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+}
+
+.block-header i {
+    font-size: 20px;
+}
+
+.block-header h3 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-grow: 1;
+}
+
+.badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+}
+
+.badge-success { background-color: var(--success-bg); color: var(--success); }
+.badge-error { background-color: var(--error-bg); color: var(--error); }
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: var(--transition-fast);
+    cursor: default;
+}
+
+.skill-pill i {
+    font-size: 10px;
+}
+
+.pill-matched {
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--success);
+}
+
+.pill-matched:hover {
+    border-color: var(--success);
+    transform: scale(1.02);
+}
+
+.pill-missing {
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: var(--error);
+}
+
+.pill-missing:hover {
+    border-color: var(--error);
+    transform: scale(1.02);
+}
+
+.empty-state {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    width: 100%;
+    text-align: center;
+    padding: 16px 0;
+}
+
+/* 7. Insights (Strengths / Weaknesses) */
+.insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.insight-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.insight-header i {
+    font-size: 20px;
+}
+
+.insight-header.text-success { color: var(--success); }
+.insight-header.text-error { color: var(--error); }
+
+.insight-items-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.insight-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.insight-item.border-success { border-left: 3px solid var(--success); }
+.insight-item.border-error { border-left: 3px solid var(--error); }
+
+.bullet-box {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.item-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* 8. AI Suggestions Grid Node Timeline */
+.suggestions-section {
+    width: 100%;
+}
+
+.suggestions-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+}
+
+.suggestions-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+}
+
+.suggestions-card-header i {
+    font-size: 20px;
+}
+
+.suggestions-card-header h3 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-grow: 1;
+}
+
+.pill-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    background-color: rgba(255, 90, 31, 0.08);
+    border: 1px solid rgba(255, 90, 31, 0.2);
+    padding: 4px 12px;
+}
+
+.suggestions-timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.suggestions-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background-color: var(--border-color);
+}
+
+.timeline-node {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 32px;
+    position: relative;
+}
+
+.timeline-node:last-child {
+    padding-bottom: 0;
+}
+
+.node-indicator {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.timeline-node:hover .node-indicator {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.node-content {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    flex-grow: 1;
+    line-height: 1.6;
+    font-size: 14.5px;
+    color: var(--text-secondary);
+}
+
+/* 9. Footer & Action Row */
+.action-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.action-btn {
+    padding: 16px 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: var(--transition-normal);
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+.footer-metadata {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: center;
+}
+
+/* 10. Animations */
+@keyframes dashboardFadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 11. Responsive Breaks */
+@media (max-width: 1023px) {
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .insights-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .dashboard-wrapper {
+        padding: 32px 16px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .header-status {
+        width: 100%;
+    }
+    
+    .status-pill {
+        justify-content: center;
+    }
+    
+    .gauge-card {
+        flex-direction: column;
+        gap: 36px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .verdict-banner {
+        justify-content: center;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
