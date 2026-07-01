@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, send_file, session, redirect,
 import os
 import json
 from dotenv import load_dotenv
-import stripe
 
 from utils.parser import extract_text
 from utils.skills import extract_skills, compare_skills
@@ -11,9 +10,6 @@ from utils.pdf_generator import generate_pdf
 
 # Load environment configurations
 load_dotenv()
-
-# Configure Stripe Client
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback_default_dev_key")
