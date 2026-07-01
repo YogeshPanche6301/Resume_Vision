@@ -1,53 +1,32 @@
 {
-    "score": 44,
-    "grade": "F",
-    "verdict": "Needs Improvement",
+    "score": 100,
+    "grade": "A+",
+    "verdict": "Excellent Match",
     "matched_skills": [
         "CSS",
-        "Docker",
-        "Git",
-        "GitHub",
         "HTML",
         "JavaScript",
-        "NumPy",
-        "Pandas",
         "Python",
-        "RAG",
-        "React",
         "SQL"
     ],
-    "missing_skills": [
-        "AWS",
-        "Algorithms",
-        "Data Structures",
-        "Deep Learning",
-        "Flask",
-        "Generative AI",
-        "Kubernetes",
-        "LangChain",
-        "Linux",
-        "Machine Learning",
-        "MongoDB",
-        "Object-Oriented Programming",
-        "PyTorch",
-        "REST API",
-        "TensorFlow"
-    ],
+    "missing_skills": [],
     "analysis": {
         "strengths": [
-            "Proven expertise in front-end development with React, HTML, and CSS.",
-            "Strong understanding of data analysis and manipulation using Python, NumPy, and Pandas.",
-            "Familiarity with version control systems like Git and GitHub."
+            "Adept at crafting responsive web applications using CSS, HTML, and JavaScript",
+            "Skilled in developing scalable and efficient databases using SQL and Python",
+            "Proficient in leveraging JavaScript to create interactive and engaging user experiences"
         ],
         "weaknesses": [
-            "Lack of experience with cloud computing platforms, specifically AWS.",
-            "Limited knowledge in machine learning frameworks such as PyTorch and TensorFlow.",
-            "Inadequate understanding of data structures and algorithms."
+            "Tendency to overcomplicate solutions with excessive use of advanced programming concepts",
+            "Inability to effectively communicate technical details to non-technical stakeholders",
+            "Lack of experience working on large-scale projects with multiple team members"
         ],
         "suggestions": [
-            "Consider taking online courses or attending workshops to gain hands-on experience with AWS and other cloud computing platforms.",
-            "Expand your skills by exploring machine learning libraries like Scikit-Learn, Keras, or OpenCV.",
-            "Practice solving problems on platforms like LeetCode, HackerRank, or CodeWars to improve your data structures and algorithms."
+            "Consider taking online courses or attending workshops to improve communication skills and adaptability",
+            "Practice simplifying complex problems by breaking them down into smaller, manageable parts",
+            "Seek out mentorship from experienced professionals to learn best practices and expand skillset",
+            "Develop a portfolio showcasing a variety of projects demonstrating technical expertise",
+            "Pursue certifications in relevant technologies (e.g. Python, JavaScript) to increase credibility"
         ]
     }
 }

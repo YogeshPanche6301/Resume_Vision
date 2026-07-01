@@ -1,5 +1,8 @@
+# pyrefly: ignore [missing-import]
 from ollama import chat
 import json
+import os
+import google.generativeai as genai
 
 
 def analyze_resume(score, matched_skills, missing_skills):
@@ -49,21 +52,34 @@ Return ONLY valid JSON.
 }}
 """
 
-    response = chat(
+    gemini_key = os.getenv("GEMINI_API_KEY")
 
-        model="llama3:latest",
+    if gemini_key:
+        print("☁️ Using Google Gemini API Cloud Service...")
+        genai.configure(api_key=gemini_key)
+        
+        # Using gemini-1.5-flash for speed and reliability, set up to return JSON
+        model = genai.GenerativeModel(
+            model_name='gemini-1.5-flash',
+            generation_config={"response_mime_type": "application/json"}
+        )
+        
+        response = model.generate_content(prompt)
+        content = response.text
+    else:
+        print("💻 Using local Ollama...")
+        response = chat(
+            model="llama3:latest",
+            format="json",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+        content = response.message.content
 
-        format="json",
+    print(content)
 
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-
-    )
-
-    print(response.message.content)
-
-    return json.loads(response.message.content)
+    return json.loads(content)
