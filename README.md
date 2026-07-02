@@ -6,7 +6,7 @@ The application utilizes the serverless **Google Gemini API** cloud model for in
 
 ---
 
-## Visual System & UX Architecture
+##  Visual System & UX Architecture
 
 * **Grid & Structure:** A balanced, 2-column modernist desktop layout with `0px` sharp borders, invoking premium engineering precision.
 * **Typography:** Curated Google Web Fonts — **Outfit** for geometric display headlines and **JetBrains Mono** for technical telemetry and data readouts.
@@ -15,7 +15,7 @@ The application utilizes the serverless **Google Gemini API** cloud model for in
 
 ---
 
-##  Key Features
+## Key Features
 
 * **Data Extraction:** Parses candidate name automatically from resume document headers.
 * **ATS Keyword Comparison:** Compares candidate skills against job specifications to isolate matches and gaps.
@@ -25,7 +25,7 @@ The application utilizes the serverless **Google Gemini API** cloud model for in
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
 * **Backend:** Flask (Python 3.10+)
 * **Frontend:** HTML5, Vanilla CSS3 (Custom Grid, Animations), JavaScript ES6
@@ -35,7 +35,7 @@ The application utilizes the serverless **Google Gemini API** cloud model for in
 
 ---
 
-##  Local Installation & Offline Setup
+## Local Installation & Offline Setup
 
 ### 1. Clone & Set Up Directory
 ```bash
@@ -58,15 +58,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment Variables
-Create a local `.env` file (which is ignored by git) in the root directory:
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-FLASK_SECRET_KEY=your_random_secret_passphrase
-```
-Get a free Gemini API key from [Google AI Studio](https://aistudio.google.com/).
 
-### 4. Boot Local Development Server
+
+### 3. Boot Local Development Server
 ```bash
 python app.py
 ```
@@ -74,7 +68,7 @@ Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser.
 
 ---
 
-## ☁️ Cloud Deployment (Vercel)
+## Cloud Deployment (Vercel)
 
 This project is pre-configured to be deployed as a serverless Flask app on **Vercel**.
 
@@ -82,7 +76,7 @@ This project is pre-configured to be deployed as a serverless Flask app on **Ver
 
 ---
 
-##  Repository Structure
+## Repository Structure
 
 ```
 ├── app.py                  # Main Flask Server & Route Controllers
