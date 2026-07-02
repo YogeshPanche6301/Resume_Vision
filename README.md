@@ -25,7 +25,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Backend:** Flask (Python 3.10+)
 * **Frontend:** HTML5, Vanilla CSS3 (Custom Grid, Animations), JavaScript ES6
@@ -35,7 +35,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 💻 Local Installation & Offline Setup
+## Local Installation & Offline Setup
 
 ### 1. Clone & Set Up Directory
 ```bash
