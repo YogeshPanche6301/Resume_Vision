@@ -6,7 +6,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🎨 Visual System & UX Architecture
+##  Visual System & UX Architecture
 
 * **Grid & Structure:** A balanced, 2-column modernist desktop layout with `0px` sharp borders, invoking premium engineering precision.
 * **Typography:** Curated Google Web Fonts — **Outfit** for geometric display headlines and **JetBrains Mono** for technical telemetry and data readouts.
@@ -15,7 +15,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 * **Data Extraction:** Parses candidate name automatically from resume document headers.
 * **ATS Keyword Comparison:** Compares candidate skills against job specifications to isolate matches and gaps.
@@ -58,14 +58,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Run Offline Ollama Instance
-* Make sure [Ollama](https://ollama.com/) is installed and running.
-* Download the default Llama 3 model:
-  ```bash
-  ollama run llama3
-  ```
 
-### 4. Boot Local Development Server
+
+### 3. Boot Local Development Server
 ```bash
 python app.py
 ```
@@ -73,7 +68,7 @@ Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser. Since n
 
 ---
 
-## ☁️ Cloud Deployment (Vercel)
+## Cloud Deployment (Vercel)
 
 This project is pre-configured to be deployed as a serverless Flask app on **Vercel**, swapping local processing for the fast cloud Gemini model.
 
@@ -91,7 +86,7 @@ FLASK_SECRET_KEY=your_random_secret_passphrase
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ├── app.py                  # Main Flask Server & Route Controllers
@@ -114,5 +109,5 @@ FLASK_SECRET_KEY=your_random_secret_passphrase
 
 ---
 
-## 📄 License
+##  License
 This project is licensed under the MIT License.
