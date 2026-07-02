@@ -1,6 +1,9 @@
 import json
 import os
+import logging
 import google.generativeai as genai
+
+logger = logging.getLogger(__name__)
 
 
 def analyze_resume(score, matched_skills, missing_skills):
@@ -55,7 +58,7 @@ Return ONLY valid JSON.
     if not gemini_key:
         raise ValueError("GEMINI_API_KEY environment variable is missing. Please configure it in your environment or .env file.")
 
-    print("☁️ Using Google Gemini API Cloud Service...")
+    logger.info("Using Google Gemini API Cloud Service...")
     genai.configure(api_key=gemini_key)
     
     # Using gemini-2.5-flash for speed and reliability, set up to return JSON
@@ -67,7 +70,7 @@ Return ONLY valid JSON.
     response = model.generate_content(prompt)
     content = response.text
 
-    print(content)
+    logger.debug("Gemini response content: %s", content)
 
     return json.loads(content)
 
@@ -102,7 +105,7 @@ Extracted Name:"""
             raise ValueError("Invalid name format returned by model")
         return name
     except Exception as e:
-        print("Name extraction error, falling back:", e)
+        logger.warning("Name extraction error, falling back: %s", e)
         # Monospace/line-based fallback
         lines = [line.strip() for line in header.split('\n') if line.strip()]
         for line in lines[:3]:

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_file, session, redirect, url_for
 import os
 import json
+import logging
 from dotenv import load_dotenv
 
 from utils.parser import extract_text
@@ -22,10 +23,23 @@ if IS_VERCEL:
     UPLOAD_FOLDER = "/tmp"
     BACKUP_FILE = "/tmp/latest_report.json"
     PDF_OUTPUT_PATH = "/tmp/ATS_Report.pdf"
+    LOG_FILE = "/tmp/app.log"
 else:
     UPLOAD_FOLDER = "uploads"
     BACKUP_FILE = "latest_report.json"
     PDF_OUTPUT_PATH = "ATS_Report.pdf"
+    LOG_FILE = "app.log"
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE, encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 ALLOWED_EXTENSIONS = {"pdf"}
 
@@ -91,7 +105,7 @@ def analyze():
 
         resume.save(filepath)
 
-        print("✅ Resume Saved")
+        logger.info("Resume Saved successfully")
 
         # ------------------------
         # Extract Resume Text
@@ -99,13 +113,13 @@ def analyze():
 
         resume_text = extract_text(filepath)
 
-        print("✅ Resume Text Extracted")
+        logger.info("Resume Text Extracted successfully")
 
         # ------------------------
         # Extract Candidate Name
         # ------------------------
         candidate_name = extract_name(resume_text)
-        print("Candidate Name:", candidate_name)
+        logger.info("Candidate Name: %s", candidate_name)
 
         # ------------------------
         # Skill Extraction
@@ -114,8 +128,8 @@ def analyze():
         resume_skills = extract_skills(resume_text)
         jd_skills = extract_skills(job_description)
 
-        print("Resume Skills:", resume_skills)
-        print("JD Skills:", jd_skills)
+        logger.info("Resume Skills: %s", resume_skills)
+        logger.info("JD Skills: %s", jd_skills)
 
         # ------------------------
         # Compare Skills
@@ -126,8 +140,8 @@ def analyze():
             jd_skills
         )
 
-        print("Matched Skills:", matched_skills)
-        print("Missing Skills:", missing_skills)
+        logger.info("Matched Skills: %s", matched_skills)
+        logger.info("Missing Skills: %s", missing_skills)
 
         # ------------------------
         # ATS Score
@@ -140,7 +154,7 @@ def analyze():
         else:
             score = 0
 
-        print("ATS Score:", score)
+        logger.info("ATS Score calculated: %d", score)
 
         # ------------------------
         # Grade
@@ -188,7 +202,7 @@ def analyze():
             missing_skills
         )
 
-        print("✅ AI Analysis Complete")
+        logger.info("AI Analysis completed successfully")
 
         # ------------------------
         # Save Report
@@ -217,7 +231,7 @@ def analyze():
             with open(BACKUP_FILE, "w", encoding="utf-8") as f:
                 json.dump(latest_report, f, indent=4)
         except Exception as e:
-            print("Warning: Could not save report backup:", e)
+            logger.warning("Could not save report backup: %s", e)
 
         # ------------------------
         # Render Dashboard
@@ -243,11 +257,8 @@ def analyze():
 
         )
 
-    except Exception:
-
-        import traceback
-
-        traceback.print_exc()
+    except Exception as e:
+        logger.exception("Error occurred during resume analysis:")
 
         return render_template(
             "index.html",
@@ -267,7 +278,7 @@ def download():
                 with open(BACKUP_FILE, "r", encoding="utf-8") as f:
                     latest_report = json.load(f)
             except Exception as e:
-                print("Error loading report backup:", e)
+                logger.error("Error loading report backup: %s", e)
 
     if not latest_report:
         return "Please analyze a resume first."
