@@ -58,9 +58,9 @@ Return ONLY valid JSON.
     print("☁️ Using Google Gemini API Cloud Service...")
     genai.configure(api_key=gemini_key)
     
-    # Using gemini-1.5-flash for speed and reliability, set up to return JSON
+    # Using gemini-2.5-flash for speed and reliability, set up to return JSON
     model = genai.GenerativeModel(
-        model_name='gemini-1.5-flash',
+        model_name='gemini-2.5-flash',
         generation_config={"response_mime_type": "application/json"}
     )
     
@@ -92,7 +92,7 @@ Extracted Name:"""
             raise ValueError("GEMINI_API_KEY is not set.")
 
         genai.configure(api_key=gemini_key)
-        model = genai.GenerativeModel(model_name='gemini-1.5-flash')
+        model = genai.GenerativeModel(model_name='gemini-2.5-flash')
         response = model.generate_content(prompt)
         name = response.text.strip()
 
