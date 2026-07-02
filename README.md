@@ -6,7 +6,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🎨 Visual System & UX Architecture
+## Visual System & UX Architecture
 
 * **Grid & Structure:** A balanced, 2-column modernist desktop layout with `0px` sharp borders, invoking premium engineering precision.
 * **Typography:** Curated Google Web Fonts — **Outfit** for geometric display headlines and **JetBrains Mono** for technical telemetry and data readouts.
@@ -15,7 +15,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 * **Data Extraction:** Parses candidate name automatically from resume document headers.
 * **ATS Keyword Comparison:** Compares candidate skills against job specifications to isolate matches and gaps.
@@ -25,7 +25,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **Backend:** Flask (Python 3.10+)
 * **Frontend:** HTML5, Vanilla CSS3 (Custom Grid, Animations), JavaScript ES6
@@ -35,7 +35,7 @@ The application features a **Dual-Execution Pipeline**: it operates completely o
 
 ---
 
-## 💻 Local Installation & Offline Setup
+##  Local Installation & Offline Setup
 
 ### 1. Clone & Set Up Directory
 ```bash
@@ -91,7 +91,7 @@ FLASK_SECRET_KEY=your_random_secret_passphrase
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```
 ├── app.py                  # Main Flask Server & Route Controllers
@@ -114,5 +114,5 @@ FLASK_SECRET_KEY=your_random_secret_passphrase
 
 ---
 
-## 📄 License
+##  License
 This project is licensed under the MIT License.
